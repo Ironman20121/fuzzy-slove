@@ -16,21 +16,16 @@ public:
             if (!root){return false;}
             presentSum+=root->val;
             if(!root->left && !root->right){
-                if(presentSum == target){
-                    return true;
-                }
+                if(presentSum == target){return true; }
             }
-            
-            if( dfs(root->left,target,presentSum)){
-                return true;
-            }
+            if( dfs(root->left,target,presentSum)){return true;}
             if(dfs(root->right,target,presentSum)){
-                return true;
+            return true;
             }
             presentSum-=root->val;
             return false;
         };
-
+      
         return dfs(root,targetSum,0);
 
     }
