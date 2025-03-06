@@ -4,8 +4,8 @@ public:
         int n = grid.size();
         vector<int> countrack(n*n);
 
-        for(int row=0;row<grid.size();row++){
-            for(int col = 0;col<grid[0].size();col++){
+        for(int row=0;row<n;row++){
+            for(int col = 0;col<n;col++){
                 countrack[grid[row][col]-1]++;
             }
         }
