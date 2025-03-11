@@ -26,10 +26,11 @@ public:
         function<bool(TreeNode*)>dfs = [&](TreeNode*root){
             if(!root){return false; ;}
             
-            dfs(root->left);
             if(root2vals[target-root->val]){
                 check = true;
             }
+           
+            dfs(root->left);
             dfs(root->right);
             return check;
         };
