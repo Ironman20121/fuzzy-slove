@@ -12,28 +12,32 @@
 class Solution {
 public:
     bool twoSumBSTs(TreeNode* root1, TreeNode* root2, int target) {
-        if (!root1 && !root2){return false;}
-        map<int,bool>root2vals;
-        function<void(TreeNode*)>dfstore = [&](TreeNode*root){
-            if(!root){return;}
-            dfstore(root->left);
-            root2vals[root->val] = true;
-            dfstore(root->right);
-        };
-        dfstore(root2);
-        
-        bool check = false;
-        function<bool(TreeNode*)>dfs = [&](TreeNode*root){
-            if(!root){return false; ;}
-            
-            if(root2vals[target-root->val]){
-                check = true;
+       std::function<bool(TreeNode*, int)> binarySearch = [&](TreeNode* root, int complement) {
+            if (!root) {
+                return false;
             }
-           
-            dfs(root->left);
-            dfs(root->right);
-            return check;
+            if (complement == root->val) {
+                return true;
+            } else if (complement < root->val) {
+                return binarySearch(root->left, complement);
+            } else {
+                return binarySearch(root->right, complement);
+            }
         };
-        return  dfs(root1);
+
+        std::function<bool(TreeNode*)> inorderTraversal = [&](TreeNode* root) {
+            if (!root) {
+                return false;
+            }
+            if (inorderTraversal(root->left)) {
+                return true;
+            }
+            if (binarySearch(root2, target - root->val)) {
+                return true;
+            }
+            return inorderTraversal(root->right);
+        };
+
+        return inorderTraversal(root1);
     }
 };
