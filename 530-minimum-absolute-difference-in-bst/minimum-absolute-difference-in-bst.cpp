@@ -13,19 +13,25 @@ class Solution {
 public:
     int getMinimumDifference(TreeNode* root) {
         int mini = 10e6;
-        vector<int>arr ;
+        // vector<int>arr ;
+        TreeNode* perv =nullptr;
         function<void(TreeNode*)> dfs = [&](TreeNode *root){
-            if(!root )return ;
+            if(!root  )return ;
+           
             dfs(root->left);
-            arr.push_back(root->val);
+            if(perv!=nullptr){
+                mini = min(mini,abs(perv->val -root->val));
+            }
+            perv = root;
+            // arr.push_back(root->val);
             dfs(root->right);
         };
         dfs(root);
-        int j=0;
-        for(int i=1;i<arr.size();i++){
-            mini= min(mini,arr[i] - arr[j]);
-            j++;
-        }
+        // int j=0;
+        // for(int i=1;i<arr.size();i++){
+        //     mini= min(mini,arr[i] - arr[j]);
+        //     j++;
+        // }
         return mini;
     }
 };
