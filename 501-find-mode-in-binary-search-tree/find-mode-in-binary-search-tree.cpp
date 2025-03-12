@@ -27,7 +27,7 @@ public:
             if(i.second > maxi){maxi = i.second;}
         }
         for(auto i:t){
-            if(i.second== maxi){ans.push_back(i.first);}
+            if(i.second== maxi){ans.insert(ans.end(),i.first);}
         }
         return ans;
         
