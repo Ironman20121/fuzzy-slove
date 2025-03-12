@@ -24,7 +24,8 @@ public:
         for (auto& colPair : order) {
         vector<int> colVals;
         for (auto& rowPair : colPair.second) {
-        for (int val : rowPair.second) { colVals.push_back(val);}
+               colVals.insert(colVals.end(), rowPair.second.begin(), rowPair.second.end());
+
         }
             ans.push_back(colVals);
         }
