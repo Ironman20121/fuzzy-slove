@@ -15,8 +15,9 @@ public:
         int ans=0;
         function<void(TreeNode*)>dfs = [&](TreeNode *root){
             if(!root)return;
-            dfs(root->left);
             if (root->val >= low && root->val <=high){ans+=root->val;}
+            dfs(root->left);
+           
             dfs(root->right);
         };
         dfs(root);
