@@ -10,7 +10,16 @@ public:
             perv=root;
             dfs(root->right);
         };
-        dfs(root);
+        function<void(TreeNode*)>dfsbst = [&](TreeNode*root){
+            if(!root)return;
+            if(root->val > p->val){
+                ans = root;
+                dfsbst(root->left);
+            }
+            else {dfsbst(root->right);}
+        };
+
+        dfsbst(root);
         return ans;
     }
 };
