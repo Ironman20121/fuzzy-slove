@@ -16,10 +16,12 @@ public:
         map<double,vector<int>>t;
         function<void(TreeNode*)>dfs =[&](TreeNode*root){
             if (!root)return;
+                
+                 dfs(root->right);
                 t[abs(root->val - target)].push_back(root->val);
                 // t[abs(root->val - target)].insert(t[abs(root->val -target)].end(),root->val);
                 dfs(root->left);
-                dfs(root->right);
+               
         };
         
         dfs(root);
