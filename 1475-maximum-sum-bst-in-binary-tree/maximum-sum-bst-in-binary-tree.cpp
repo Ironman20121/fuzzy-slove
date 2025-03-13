@@ -8,7 +8,7 @@ public:
         int maxsum = 0;
     function<Bstinfo(TreeNode*, int&)> bup = [&](TreeNode* root, int& maxsum) {
         if (!root) {
-            return Bstinfo{true, INT_MAX, INT_MIN, 0}; 
+            return Bstinfo{true, INT_MAX, INT_MIN, 0}; // Correct base case
         }
         Bstinfo leftinfo = bup(root->left, maxsum);
         Bstinfo rightinfo = bup(root->right, maxsum);
@@ -18,7 +18,7 @@ public:
         if (leftinfo.isbst && rightinfo.isbst && root->val > leftinfo.maxi && root->val < rightinfo.mini) {
             currinfo.isbst = true;
             currinfo.mini = (root->left) ? leftinfo.mini : root->val;
-            currinfo.maxi = (root->right) ? rightinfo.maxi : root->val; 
+            currinfo.maxi = (root->right) ? rightinfo.maxi : root->val; //correct maxi assignment
             maxsum = max(maxsum, currinfo.sum);
         } else {
             currinfo.isbst = false;
