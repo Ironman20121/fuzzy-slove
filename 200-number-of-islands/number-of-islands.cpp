@@ -39,7 +39,7 @@ public:
         for(int r=0;r<ROWS;r++){
             for(int c=0;c<COLS;c++){
                 if(grid[r][c]=='1'){
-                    bfs(r,c);
+                    dfs(r,c);
                     islands++;
                 }
             }
