@@ -28,11 +28,21 @@ public:
                 }   
             }
         };
+        function<void(int ,int)>dfs = [&](int row,int col){
+            if(min(row,col)<0 || row >= grid.size()|| col >= grid[0].size()|| grid[row][col]=='0'){
+                return;
+            }
+            int directions[4][2]  = {{1,0},{-1,0},{0,1},{0,-1}};
+            grid[row][col] = '0';
+           for(int i=0;i<4;i++){
+            dfs(row+directions[i][0],col+directions[i][1]);
+           }
 
+        };
         for(int r=0;r<ROWS;r++){
             for(int c=0;c<COLS;c++){
                 if(grid[r][c]=='1'){
-                    bfs(r,c);
+                    dfs(r,c);
                     islands++;
                 }
             }
