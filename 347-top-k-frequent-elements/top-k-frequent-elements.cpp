@@ -6,15 +6,17 @@ public:
         for(auto i :nums){
             count[i]++;
         }
-        vector<vector<int>>bucket(nums.size()+1);
+        priority_queue< pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>minHeap;
+          
         for(auto i:count){
-            bucket[i.second].push_back(i.first);
-        }
-        for(int i=bucket.size()-1;i>0;i--){
-            for(auto j:bucket[i]){
-                ans.push_back(j);
-                if (ans.size()==k){return ans;}
+            minHeap.push({i.second,i.first});
+            if(minHeap.size() > k){
+                minHeap.pop();
             }
+        }
+        for(int i=0;i<k;i++){
+            ans.push_back(minHeap.top().second);
+            minHeap.pop();
         }
         return ans;
     }
